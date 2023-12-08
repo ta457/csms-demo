@@ -1,36 +1,120 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+    </script>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body @if (Str::contains(request()->route()->uri,'profile'))
+    class="font-sans antialiased flex"
+    @else
+    class="font-sans antialiased flex overflow-auto lg:overflow-hidden"
+    @endif
+    >
+
+    @if (isset($sidebar)) {{ $sidebar }} @endif
+
+    <div class="w-full min-h-screen bg-gray-100 dark:bg-gray-900">
+        @include('layouts.navigation')
+
+        <!-- Page Heading -->
+        @if (isset($header))
+        <header class="bg-white dark:bg-gray-800 shadow">
+            <div class=" mx-auto py-6 px-4 sm:px-6 lg:px-8 flex">
+                {{ $header }}
+            </div>
+        </header>
+        @endif
+
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+</body>
+
+<script>
+    // handle delete modal ==============================================================
+    function changeDeleteFormAction(url, id) {
+        var form = document.getElementById('deleteRecordForm');
+        var deleteMessage = document.getElementById('deleteMessage'); 
+        form.action = url + id;
+        deleteMessage.textContent ='ID = ' + id;
+    }
+
+    // handle delete all btn ===========================================================
+    function showDeleteAllBtn() {
+        document.getElementById('fakeDeleteAllBtn').classList.remove('hidden');
+    }
+    
+    function clickDeleteAllBtn() {
+        realBtn = document.getElementById('realDeleteAllBtn');
+        realBtn.click();
+    }
+
+
+    // Handle api calls & display info in Update modal ========================================
+    // Function to update modal content with user data
+    function updateUserModal(url, userData) {
+        let form = document.getElementById('update-form');
+        form.action = url;
+        document.getElementById('update-name').value = userData.name;
+        document.getElementById('update-username').value = userData.username;
+        document.getElementById('update-email').value = userData.email;
+        //document.getElementById('update-password').value = userData.password;
+        let roleSelect = document.getElementById('update-role');
+        for (let i = 0; i < roleSelect.options.length; i++) {
+            if (roleSelect.options[i].value == userData.role) {
+                roleSelect.options[i].selected = true;
+            } else {
+                roleSelect.options[i].selected = false;
+            }
+        }
+    }
+
+    function updateFormData(url, userId) {
+        let apiUrl = '/api/v1/user/' + userId;
+
+        // Make fetch request to get user data
+        fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            // Update modal content with user data
+            updateUserModal(url, data);
+        })
+        .catch(function (error) {
+            console.error('Error fetching user data:', error);
+        });
+    }
+</script>
+
 </html>

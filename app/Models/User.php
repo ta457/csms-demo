@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -42,4 +44,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getRoleNameAttribute()
+    {
+        $roles = [1 => 'Admin', 2 => 'Manager', 3 => 'Employee'];
+        return $roles[$this->attributes['role']];
+    }
 }

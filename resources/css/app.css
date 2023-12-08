@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  #admin-paginate > nav > div > div > p {
+    @apply dark:text-white;
+  }
+  #admin-paginate > nav > :last-child > :first-child > p {
+    @apply dark:text-white;
+  }
+  #admin-paginate > nav > :last-child > :last-child > span > span > span {
+    @apply dark:bg-gray-800;
+    @apply dark:text-gray-300;
+    @apply dark:focus:text-gray-500;
+    @apply dark:border-gray-600;
+  }
+  #admin-paginate > nav > :last-child > :last-child > span > a {
+    @apply dark:bg-gray-800;
+    @apply dark:text-gray-500;
+    @apply dark:border-gray-600;
+    @apply focus:bg-gray-100;
+    @apply dark:focus:bg-gray-700;
+  }
+}

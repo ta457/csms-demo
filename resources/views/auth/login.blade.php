@@ -2,14 +2,27 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <div class="flex justify-items-center">
+        <h1 class="text-gray-900 dark:text-white mx-auto text-3xl font-bold pt-4 pb-8">
+            Welcome back!
+        </h1>
+    </div>
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
-        <div>
+        {{-- <div class="hidden">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div> --}}
+
+        <!-- Username -->
+        <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
         <!-- Password -->
