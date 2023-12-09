@@ -22,3 +22,7 @@
 11. Run: php artisan serve
 12. Open a new Terminal console, run: npm run dev
 13. Open the app at localhost:8000
+
+## Account
+username: Admin
+password: 11111111
