@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
@@ -11,7 +12,7 @@ class AdminProductController extends Controller
     public function index($products = null)
     {   
         if (is_null($products)) {
-            $products = Product::oldest();
+            $products = Product::with('images')->oldest();
         }
 
         $props = [
@@ -64,11 +65,24 @@ class AdminProductController extends Controller
             'name' => 'required|max:255|min:1',
             'description' => 'required|max:255|min:1',
             'price' => 'required|integer',
-            'category_id' => 'required|integer'
+            'category_id' => 'required|integer',
+            'files.*' => 'required|image|max:4096'
         ]);
         $attributes['category_id'] = $attributes['category_id'] * 1;
-        
-        $product->update($attributes);
+        $product->update([
+            'name' => $attributes['name'],
+            'description' => $attributes['description'],
+            'price' => $attributes['price'],
+            'category_id' => $attributes['category_id']
+        ]);
+
+        foreach ($attributes['files'] as $file) {
+            ProductImage::create([
+                'product_id' => $product->id,
+                'file' => $file->store('product-images')
+            ]);
+        }
+
         return redirect("/admin/products")->with('success', 'Your changes have been saved');
     }
 

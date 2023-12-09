@@ -16,7 +16,18 @@ class ProductAPIController extends Controller
 
   public function show(Product $product)
   {
-    return response()->json($product);
+    $product->load('images');
+    $responseData = [
+      'id' => $product->id,
+      'name' => $product->name,
+      'price' => $product->price,
+      'description' => $product->description,
+      'created_at' => $product->created_at->toDateTimeString(),
+      'updated_at' => $product->updated_at->toDateTimeString(),
+      'images' => $product->images,
+    ];
+
+    return response()->json($responseData);
   }
 
   public function update(Product $product)

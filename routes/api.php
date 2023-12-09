@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\UserAPIController;
 use App\Http\Controllers\api\v1\CategoryAPIController;
 use App\Http\Controllers\api\v1\ProductAPIController;
+use App\Http\Controllers\api\v1\ProductImgAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +31,6 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('product/{product}', [ProductAPIController::class, 'show']);
     Route::patch('product/update/{product}', [ProductAPIController::class, 'update']);
     Route::delete('product/delete/{product}', [ProductAPIController::class, 'delete']);
+
+    Route::delete('product-img/delete/{img}', [ProductImgAPIController::class, 'delete']);
 });

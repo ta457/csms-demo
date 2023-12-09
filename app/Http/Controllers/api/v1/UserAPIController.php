@@ -8,9 +8,18 @@ use Illuminate\Http\Request;
 
 class UserAPIController extends Controller
 {
-    public function show($id)
+    public function show(User $user)
     {
-        $users = User::find($id);
-        return response()->json($users);
+        $responseData = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'username' => $user->username,
+            'email' => $user->email,
+            'role' => $user->role,
+            'created_at' => $user->created_at->toDateTimeString(),
+            'updated_at' => $user->updated_at->toDateTimeString(),
+          ];
+      
+        return response()->json($responseData);
     }
 }

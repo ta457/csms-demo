@@ -105,6 +105,7 @@
     function updateProductModal(url, productData) {
         let form = document.getElementById('update-form');
         form.action = url;
+
         document.getElementById('update-created').value = productData.created_at;
         document.getElementById('update-updated').value = productData.updated_at;
         document.getElementById('update-name').value = productData.name;
@@ -118,6 +119,49 @@
                 categorySelect.options[i].selected = false;
             }
         }
+
+        let imgContainer = document.getElementById('update-images');
+        while (imgContainer.firstChild) {
+            imgContainer.removeChild(imgContainer.firstChild);
+        }
+        productData.images.forEach(function (image) {
+            let wrapper = document.createElement('div');
+            wrapper.classList.add('relative');
+
+            let imgElement = document.createElement('img');
+            imgElement.classList.add('w-24', 'h-24', 'rounded-md');
+            imgElement.style.objectFit = 'cover';
+            imgElement.src = '/storage/' + image.file;
+            imgElement.alt = 'product-img';
+
+            let deleteButton = document.createElement('button');
+            deleteButton.classList.add('mr-1','mb-1','font-bold','text-sm','w-6','h-6','absolute','bottom-0','right-0','rounded-full','bg-rose-600','hover:bg-rose-400','text-white','shadow-md');
+            deleteButton.textContent = '-';
+            deleteButton.setAttribute('onclick', `deleteImage(${image.id},'/api/v1/product/${productData.id}','/admin/products/${productData.id}','product')`);
+
+            wrapper.appendChild(imgElement);
+            wrapper.appendChild(deleteButton);
+            imgContainer.appendChild(wrapper);
+        });
+    }
+
+    function deleteImage(imageId,apiUrl, url, key) {
+        fetch(`/api/v1/product-img/delete/${imageId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log('Image deleted successfully');
+        })
+        .catch(error => {
+            console.error('Error deleting image:', error);
+        });
+        updateFormData(apiUrl, url, key);
     }
 
     function updateFormData(apiUrl, url, key) {

@@ -68,7 +68,7 @@
   </x-admin.create-modal>
 
   <!-- Update modal ------------------------------ -->
-  <x-admin.update-modal action="/admin/categories" header="Update category">
+  <x-admin.update-modal action="/admin/categories" header="Update category" :hideBtn="false">
     <div>
       <x-input-label for="update-created" :value="__('Created at')" />
       <x-text-input id="update-created" name="created" type="text" class="mt-1 block w-full text-sm" readonly />

@@ -14,10 +14,17 @@ class CategoryAPIController extends Controller
     return response()->json($categories);
   }
 
-  public function show($id)
+  public function show(Category $category)
   {
-    $categories = Category::find($id);
-    return response()->json($categories);
+    $responseData = [
+      'id' => $category->id,
+      'name' => $category->name,
+      'description' => $category->description,
+      'created_at' => $category->created_at->toDateTimeString(),
+      'updated_at' => $category->updated_at->toDateTimeString(),
+    ];
+
+    return response()->json($responseData);
   }
 
 }
