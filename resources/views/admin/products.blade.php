@@ -155,7 +155,6 @@
     
     <div class="col-span-2">
       <x-admin.update-file-form />
-      
     </div>
   </x-admin.update-modal>
 
