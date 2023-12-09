@@ -72,7 +72,7 @@
   </div>
 
   <!-- Create product modal ------------------------- -->
-  <x-admin.create-modal action="/admin/products" header="Create new product" hideBtn="true">
+  <x-admin.create-modal action="/admin/products" header="Create new product">
     <div>
       <x-input-label for="name" :value="__('Name')" />
       <x-text-input id="name" name="name" type="text" class="mt-1 block w-full text-sm" placeholder="Product name" required />
@@ -102,9 +102,13 @@
       </select>
     </div>
 
-    <div class="col-span-2">
-      <x-admin.update-file-form />
+    <div>
+      <x-input-label for="product-img" :value="__('Images')" />
+      <x-text-input id="product-img" name="files[]" type="file" class="mt-1 block w-full text-sm" multiple required />
     </div>
+    {{-- <div class="col-span-2">
+      <x-admin.update-file-form />
+    </div> --}}
   </x-admin.create-modal>
 
   <!-- Update modal ------------------------------ -->
@@ -168,18 +172,6 @@
 </x-app-layout>
 
 <script>
-  let deleteBtns = document.querySelectorAll('[id^="/submission/"]');
-  console.log(deleteBtns);
-  deleteBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const dynamicNumber = btn.id.split("/")[2];
-      console.log(dynamicNumber);
-      document.getElementById('deleteButton').click();
-      const form = document.getElementById('delete-file');
-      form.action = `/submission/${dynamicNumber}`;
-    })
-  });
-
   const fileTempl = document.getElementById("file-template"),
   imageTempl = document.getElementById("image-template"),
   empty = document.getElementById("empty");
