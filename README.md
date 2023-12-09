@@ -24,5 +24,5 @@
 13. Open the app at localhost:8000
 
 ## Account
-username: Admin
-password: 11111111
+- username: admin
+- password: 11111111
