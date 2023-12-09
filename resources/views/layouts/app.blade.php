@@ -77,6 +77,8 @@
     function updateUserModal(url, userData) {
         let form = document.getElementById('update-form');
         form.action = url;
+        document.getElementById('update-created').value = userData.created_at;
+        document.getElementById('update-updated').value = userData.updated_at;
         document.getElementById('update-name').value = userData.name;
         document.getElementById('update-username').value = userData.username;
         document.getElementById('update-email').value = userData.email;
@@ -91,8 +93,34 @@
         }
     }
 
-    function updateFormData(url, userId) {
-        let apiUrl = '/api/v1/user/' + userId;
+    function updateCategoryModal(url, categoryData) {
+        let form = document.getElementById('update-form');
+        form.action = url;
+        document.getElementById('update-created').value = categoryData.created_at;
+        document.getElementById('update-updated').value = categoryData.updated_at;
+        document.getElementById('update-name').value = categoryData.name;
+        document.getElementById('update-description').value = categoryData.description;
+    }
+
+    function updateProductModal(url, productData) {
+        let form = document.getElementById('update-form');
+        form.action = url;
+        document.getElementById('update-created').value = productData.created_at;
+        document.getElementById('update-updated').value = productData.updated_at;
+        document.getElementById('update-name').value = productData.name;
+        document.getElementById('update-description').value = productData.description;
+        document.getElementById('update-price').value = productData.price;
+        let categorySelect = document.getElementById('update-category');
+        for (let i = 0; i < categorySelect.options.length; i++) {
+            if (categorySelect.options[i].value == productData.category_id) {
+                categorySelect.options[i].selected = true;
+            } else {
+                categorySelect.options[i].selected = false;
+            }
+        }
+    }
+
+    function updateFormData(apiUrl, url, key) {
 
         // Make fetch request to get user data
         fetch(apiUrl, {
@@ -109,7 +137,15 @@
         })
         .then(function (data) {
             // Update modal content with user data
-            updateUserModal(url, data);
+            if(key === 'user') {
+                updateUserModal(url, data);
+            }
+            if(key === 'category') {
+                updateCategoryModal(url, data);
+            }
+            if(key === 'product') {
+                updateProductModal(url, data);
+            }
         })
         .catch(function (error) {
             console.error('Error fetching user data:', error);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ProfileController;
@@ -61,6 +62,36 @@ Route::middleware('admin')->group(function () {
     Route::patch(
         '/admin/users/{user}',
         [AdminUserController::class, 'update']
+    );
+
+    // product category CRUD routes =========================================================
+    Route::get(
+        '/admin/categories',
+        [AdminCategoryController::class, 'index']
+    );
+    Route::post(
+        '/admin/categories/filter',
+        [AdminCategoryController::class, 'filter']
+    );
+    Route::post(
+        '/admin/categories',
+        [AdminCategoryController::class, 'store']
+    );
+    Route::delete(
+        '/admin/categories/{category}',
+        [AdminCategoryController::class, 'destroy']
+    );
+    Route::post(
+        '/admin/categories/destroy-all',
+        [AdminCategoryController::class, 'destroyAll']
+    );
+    Route::get(
+        '/admin/categories/{category}',
+        [AdminCategoryController::class, 'edit']
+    );
+    Route::patch(
+        '/admin/categories/{category}',
+        [AdminCategoryController::class, 'update']
     );
 
     // product CRUD routes =========================================================

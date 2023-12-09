@@ -73,17 +73,13 @@ class AdminUserController extends Controller
         $attributes = request()->validate([
             'name' => 'required|max:255',
             'username' => 'required|max:255|min:3',
+            'email' => 'required|email|max:255',
             'password' => 'required|min:8|max:255',
-            'role' => 'required'
+            'role' => 'required|integer'
         ]);
+
         $attributes['role'] = $attributes['role'] * 1;
-        $user->update([
-            'username' => $attributes['username'],
-            'name' => $attributes['name'],
-            'email' => $attributes['username'] . '@gmail.com',
-            'password' => $attributes['password'],
-            'role' => $attributes['role']
-        ]);
+        $user->update($attributes);
         return redirect("/admin/users")->with('success', 'Your changes have been saved');
     }
 

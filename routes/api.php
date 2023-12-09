@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\v1\UserAPIController;
+use App\Http\Controllers\api\v1\CategoryAPIController;
 use App\Http\Controllers\api\v1\ProductAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function() {
     Route::get('user/{user}', [UserAPIController::class, 'show']);
 
+    Route::get('category/{category}', [CategoryAPIController::class, 'show']);
+
     Route::get('product/list', [ProductAPIController::class, 'index']);
     Route::get('product/{product}', [ProductAPIController::class, 'show']);
-    Route::get('product/update/{product}', [ProductAPIController::class, 'update']);
-    Route::get('product/delete/{product}', [ProductAPIController::class, 'delete']);
+    Route::patch('product/update/{product}', [ProductAPIController::class, 'update']);
+    Route::delete('product/delete/{product}', [ProductAPIController::class, 'delete']);
 });

@@ -9,7 +9,7 @@
 
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-      {{ __('Admin') }}
+      {{ __('Users management') }}
     </h2>
     <div class="font-semibold text-xl">
       <x-header-message />
@@ -59,7 +59,12 @@
             <td class="px-4 py-3">
               {{ $user->role_name }}
             </td>
-            @if ($user->id !== 1) <x-admin.table-dropdown action='/admin/users' :id="$user->id" /> @endif
+            @if ($user->id !== 1) 
+              <x-admin.table-dropdown 
+                action='/admin/users' :id="$user->id" 
+                onclick="updateFormData('/api/v1/user/{{ $user->id }}','/admin/users/{{ $user->id }}', 'user')"
+              /> 
+            @endif
           </tr>
         @endforeach
       </x-admin.table-body>
@@ -104,6 +109,16 @@
 
   <!-- Update modal ------------------------------ -->
   <x-admin.update-modal action="/admin/users" header="Update user">
+    <div>
+      <x-input-label for="update-created" :value="__('Created at')" />
+      <x-text-input id="update-created" name="created" type="text" class="mt-1 block w-full text-sm" readonly />
+    </div>
+
+    <div>
+      <x-input-label for="update-updated" :value="__('Updated at')" />
+      <x-text-input id="update-updated" name="updated" type="text" class="mt-1 block w-full text-sm" readonly />
+    </div>
+    
     <div>
       <x-input-label for="update-name" :value="__('Name')" />
       <x-text-input id="update-name" name="name" type="text" class="mt-1 block w-full text-sm" 

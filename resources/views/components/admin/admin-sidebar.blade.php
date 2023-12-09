@@ -7,6 +7,14 @@
     <x-icon.user-icon :active="$isUserPage" />
   </x-sidebar-item>
 
+  @php $isCategoryPage = Str::contains(request()->route()->uri, '/categories') @endphp
+  <x-sidebar-item 
+    :active="$isCategoryPage"
+    href="/admin/categories"
+    label="Categories">
+    <x-icon.category-icon :active="$isCategoryPage" />
+  </x-sidebar-item>
+
   @php $isProductPage = Str::contains(request()->route()->uri, '/products') @endphp
   <x-sidebar-item 
     :active="$isProductPage"

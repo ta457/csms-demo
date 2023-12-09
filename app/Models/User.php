@@ -35,6 +35,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $dateFormat = 'Y-m-d H:i:s';
+
     /**
      * The attributes that should be cast.
      *

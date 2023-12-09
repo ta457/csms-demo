@@ -72,7 +72,7 @@
   </div>
   {{-- search section END ------------------- --}}
 
-  {{-- create record & actions START------------ --}}
+  {{-- create record & delete all START------------ --}}
   <div
     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
     <button type="button" id="createModalButton" data-modal-target="createModal" data-modal-toggle="createModal"
@@ -87,7 +87,7 @@
     <div class="flex items-center space-x-3 w-full md:w-auto">
       <button data-modal-target="deleteAllModal" data-modal-toggle="deleteAllModal"
         id="fakeDeleteAllBtn" type="button"
-        class="hidden border border-gray-200 rounded-lg flex w-full text-sm items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
+        class="hidden border border-gray-200 dark:border-gray-600 rounded-lg flex w-full text-sm items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
         <svg class="w-4 h-4 mr-2" viewbox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true">
           <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
@@ -97,5 +97,5 @@
       </button>
     </div>
   </div>
-  {{-- create record & actions END ------------ --}}
+  {{-- create record & delete all END ------------ --}}
 </div>
