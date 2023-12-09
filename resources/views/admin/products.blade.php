@@ -72,7 +72,7 @@
   </div>
 
   <!-- Create product modal ------------------------- -->
-  <x-admin.create-modal action="/admin/products" header="Create new product">
+  <x-admin.create-modal action="/admin/products" header="Create new product" hideBtn="true">
     <div>
       <x-input-label for="name" :value="__('Name')" />
       <x-text-input id="name" name="name" type="text" class="mt-1 block w-full text-sm" placeholder="Product name" required />
@@ -100,6 +100,10 @@
           </option>
         @endforeach
       </select>
+    </div>
+
+    <div class="col-span-2">
+      <x-admin.update-file-form />
     </div>
   </x-admin.create-modal>
 

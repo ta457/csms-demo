@@ -19,12 +19,14 @@
         </button>
       </div>
       <!-- Modal body -->
-      <form action="{{ $action }}" method="POST">
+      <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid gap-4 mb-4 sm:grid-cols-2">
           {{ $slot }}
         </div>
-        <x-primary-button>Save</x-primary-button>
+        @if (!isset($hideBtn))
+          <x-primary-button>Save</x-primary-button>
+        @endif
       </form>
     </div>
   </div>
