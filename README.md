@@ -15,6 +15,10 @@
 4. Run: php artisan key:generate
 5. Run: php artisan migrate
 6. Run: php artisan db:seed
-7. Run: npm install
-8. Run: php artisan serve
-9. Open a new Terminal console, run: npm run dev
+7. Open .env file, change FILESYSTEM_DISK=local to FILESYSTEM_DISK=public
+8. Run: php artisan storage:link
+9. Run: php artisan config:clear
+10. Run: npm install
+11. Run: php artisan serve
+12. Open a new Terminal console, run: npm run dev
+13. Open the app at localhost:8000
