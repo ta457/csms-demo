@@ -85,7 +85,7 @@
 
     <div>
       <x-input-label for="price" :value="__('Price')" />
-      <x-text-input id="price" name="price" type="text" class="mt-1 block w-full text-sm" placeholder="100000" required />
+      <x-text-input onkeypress="return isNumberKey(event)" id="price" name="price" type="text" class="mt-1 block w-full text-sm" placeholder="100000" required />
     </div>
 
     <div>
@@ -135,7 +135,7 @@
 
     <div>
       <x-input-label for="update-price" :value="__('Price')" />
-      <x-text-input id="update-price" name="price" type="text" class="mt-1 block w-full text-sm" placeholder="100000" required />
+      <x-text-input onkeypress="return isNumberKey(event)" id="update-price" name="price" type="text" class="mt-1 block w-full text-sm" placeholder="100000" required />
     </div>
 
     <div>

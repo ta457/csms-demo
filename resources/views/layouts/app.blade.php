@@ -80,7 +80,7 @@
         document.getElementById('update-created').value = userData.created_at;
         document.getElementById('update-updated').value = userData.updated_at;
         document.getElementById('update-name').value = userData.name;
-        document.getElementById('update-username').value = userData.username;
+        // document.getElementById('update-username').value = userData.username;
         document.getElementById('update-email').value = userData.email;
         //document.getElementById('update-password').value = userData.password;
         let roleSelect = document.getElementById('update-role');
@@ -135,6 +135,7 @@
             imgElement.alt = 'product-img';
 
             let deleteButton = document.createElement('button');
+            deleteButton.setAttribute('type', 'button');
             deleteButton.classList.add('mr-1','mb-1','font-bold','text-sm','w-6','h-6','absolute','bottom-0','right-0','rounded-full','bg-rose-600','hover:bg-rose-400','text-white','shadow-md');
             deleteButton.textContent = '-';
             deleteButton.setAttribute('onclick', `deleteImage(${image.id},'/api/v1/product/${productData.id}','/admin/products/${productData.id}','product')`);
@@ -194,6 +195,18 @@
         .catch(function (error) {
             console.error('Error fetching user data:', error);
         });
+    }
+
+    function isNumberKey(evt) {
+        // Get the event key code
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+
+        // Allow only numeric input (0-9) and special keys like Backspace, Delete, Tab
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 8 && charCode !== 46 && charCode !== 9) {
+        return false;
+        }
+
+        return true;
     }
 </script>
 

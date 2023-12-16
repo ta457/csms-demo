@@ -83,7 +83,7 @@
 
     <div>
       <x-input-label for="username" :value="__('Username')" />
-      <x-text-input id="username" name="username" type="text" class="mt-1 block w-full text-sm" placeholder="John Doe" required />
+      <x-text-input id="username" name="username" type="text" class="mt-1 block w-full text-sm" placeholder="johndoe" required />
     </div>
 
     <div>
@@ -126,10 +126,10 @@
       />
     </div>
 
-    <div>
+    {{-- <div>
       <x-input-label for="update-username" :value="__('Username')" />
       <x-text-input id="update-username" name="username" type="text" class="mt-1 block w-full text-sm" placeholder="John Doe" required />
-    </div>
+    </div> --}}
 
     <div>
       <x-input-label for="update-email" :value="__('Email')" />

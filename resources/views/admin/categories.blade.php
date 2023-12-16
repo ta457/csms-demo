@@ -38,8 +38,8 @@
             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               {{ $category->name }}
             </th>
-            <td class="px-4 py-3">
-              {{ $category->description }}
+            <td class="px-4 py-3 max-w-2xl overflow-hidden overflow-ellipsis">
+              <div class="whitespace-normal">{{ $category->description }}</div>
             </td>
             <x-admin.table-dropdown 
               action='/admin/categories' :id="$category->id" 

@@ -22,7 +22,7 @@
         </button>
       </div>
       <!-- Modal body -->
-      <form id="update-form" action="/admin/users/" method="POST" enctype="multipart/form-data">
+      <form id="update-form" action="/admin/users/" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
         @method('PATCH')
         <div class="grid gap-4 mb-4 sm:grid-cols-2">

@@ -43,7 +43,7 @@ class AdminUserController extends Controller
     {   
         $attributes = request()->validate([
             'name' => 'required|max:255',
-            'username' => 'required|max:255|min:3',
+            'username' => 'required|max:255|min:3|',
             'email' => 'required|email|max:255',
             'password' => 'required|min:8|max:255',
             'role' => 'required'
@@ -72,9 +72,7 @@ class AdminUserController extends Controller
     {
         $attributes = request()->validate([
             'name' => 'required|max:255',
-            'username' => 'required|max:255|min:3',
             'email' => 'required|email|max:255',
-            'password' => 'required|min:8|max:255',
             'role' => 'required|integer'
         ]);
 

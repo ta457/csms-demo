@@ -72,8 +72,7 @@ class AdminProductController extends Controller
             'name' => 'required|max:255|min:1',
             'description' => 'required|max:255|min:1',
             'price' => 'required|integer',
-            'category_id' => 'required|integer',
-            'files.*' => 'required|image|max:4096'
+            'category_id' => 'required|integer'
         ]);
         $attributes['category_id'] = $attributes['category_id'] * 1;
         $product->update([
@@ -83,11 +82,16 @@ class AdminProductController extends Controller
             'category_id' => $attributes['category_id']
         ]);
 
-        foreach ($attributes['files'] as $file) {
-            ProductImage::create([
-                'product_id' => $product->id,
-                'file' => $file->store('product-images')
+        if(count(request()->files) !== 0) {
+            $attributes = request()->validate([
+                'files.*' => 'required|image|max:4096'
             ]);
+            foreach ($attributes['files'] as $file) {
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'file' => $file->store('product-images')
+                ]);
+            }
         }
 
         return redirect("/admin/products")->with('success', 'Your changes have been saved');
