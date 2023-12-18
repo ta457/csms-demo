@@ -43,11 +43,16 @@ class AdminUserController extends Controller
     {   
         $attributes = request()->validate([
             'name' => 'required|max:255',
-            'username' => 'required|max:255|min:3|',
+            'username' => 'required|max:255|',
             'email' => 'required|email|max:255',
             'password' => 'required|min:8|max:255',
             'role' => 'required'
         ]);
+
+        //check if username contains spaces
+        if (strpos($attributes['username'], ' ') !== false) {
+            return redirect('/admin/users')->with('failed', 'Username can\'t contain spaces');
+        }
 
         $attributes['role'] = $attributes['role'] * 1;
         if (!(User::where('username', $attributes['username'])->get()->count() > 0)) {

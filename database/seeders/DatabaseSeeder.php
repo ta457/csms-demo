@@ -47,6 +47,10 @@ class DatabaseSeeder extends Seeder
             'role' => 3
         ]);
 
+        $category0 = Category::create([
+            'name' => 'Default category',
+            'description' => 'All products in deleted categories go here'
+        ]);
         $category1 = Category::create([
             'name' => 'Product type A',
             'description' => 'This is a product category'

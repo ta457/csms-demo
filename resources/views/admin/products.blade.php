@@ -49,8 +49,8 @@
             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               {{ $product->name }}
             </th>
-            <td class="px-4 py-3">
-              {{ $product->description }}
+            <td class="px-4 py-3 max-w-2xl overflow-hidden overflow-ellipsis">
+              <div class="whitespace-normal">{{ $product->description }}</div>
             </td>
             <td class="px-4 py-3">
               {{ $product->price }}
@@ -92,7 +92,6 @@
       <x-input-label for="category" :value="__('Category')" />
       <select id="category" name="category_id"
         class="mt-1 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-500 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
-        <option selected="">Select category</option>
         @foreach ($categories as $category)
           <option class="text-gray-900 dark:text-white" 
             value="{{ $category->id }}">

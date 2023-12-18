@@ -47,7 +47,7 @@ class AdminProductController extends Controller
         $attributes = request()->validate([
             'name' => 'required|max:255|min:1',
             'description' => 'required|max:255|min:1',
-            'price' => 'required|integer',
+            'price' => 'required|integer|max:1000000000',
             'category_id' => 'required|integer',
             'files.*' => 'required|image|max:4096'
         ]);

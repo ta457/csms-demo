@@ -62,8 +62,19 @@ class AdminCategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $category->delete();
-        return redirect('/admin/categories')->with('success', 'Category deleted');
+        $products = $category->products;
+        //for each products in this category, assign it to default category
+        foreach ($products as $product) {
+            $product->category_id = 1;
+            $product->save();
+        }
+        //delete this category if it's not default category
+        if ($category->id != 1) {
+            $category->delete();
+            return redirect('/admin/categories')->with('success', 'Category deleted');
+        } else {
+            return redirect('/admin/categories')->with('failed', 'Can\'t delete default category');
+        }
     }
 
     public function destroyAll(Request $request)
