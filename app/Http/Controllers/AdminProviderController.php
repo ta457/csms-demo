@@ -30,7 +30,9 @@ class AdminProviderController extends Controller
 
         if(request('search')) {
             $providers->where('name', 'like', '%' . request('search') . '%')
-                ->orWhere('description', 'like', '%' . request('search') . '%');
+                ->orWhere('description', 'like', '%' . request('search') . '%')
+                ->orWhere('phone', 'like', '%' . request('search') . '%')
+                ->orWhere('email', 'like', '%' . request('search') . '%');
         }
 
         return $this->index($providers);
@@ -40,7 +42,7 @@ class AdminProviderController extends Controller
     {   
         $attributes = request()->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'email|max:255',
             'address' => 'string|max:255',

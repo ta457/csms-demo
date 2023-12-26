@@ -93,17 +93,17 @@
 
     <div>
       <x-input-label for="phone" :value="__('Phone')" />
-      <x-text-input onkeypress="return isNumberKey(event)" id="phone" name="phone" type="text" class="mt-1 block w-full text-sm" placeholder="0000000000" />
+      <x-text-input onkeypress="return isNumberKey(event)" id="phone" name="phone" type="text" class="mt-1 block w-full text-sm" placeholder="0000000000" required />
     </div>
 
     <div>
       <x-input-label for="email" :value="__('Email')" />
-      <x-text-input id="email" name="email" type="email" class="mt-1 block w-full text-sm" placeholder="provider@gmail.com" />
+      <x-text-input id="email" name="email" type="email" class="mt-1 block w-full text-sm" placeholder="provider@gmail.com" required />
     </div>
 
     <div>
       <x-input-label for="address" :value="__('Address')" />
-      <x-text-input id="address" name="address" type="text" class="mt-1 block w-full text-sm" placeholder="Street A, District B, City C" />
+      <x-text-input id="address" name="address" type="text" class="mt-1 block w-full text-sm" placeholder="Street A, District B, City C" required />
     </div>
   </x-admin.create-modal>
 
@@ -133,17 +133,17 @@
 
     <div>
       <x-input-label for="update-phone" :value="__('Phone')" />
-      <x-text-input onkeypress="return isNumberKey(event)" id="update-phone" name="phone" type="text" class="mt-1 block w-full text-sm" placeholder="0000000000" />
+      <x-text-input onkeypress="return isNumberKey(event)" id="update-phone" name="phone" type="text" class="mt-1 block w-full text-sm" placeholder="0000000000" required />
     </div>
 
     <div>
       <x-input-label for="update-email" :value="__('Email')" />
-      <x-text-input id="update-email" name="email" type="email" class="mt-1 block w-full text-sm" placeholder="provider@gmail.com" />
+      <x-text-input id="update-email" name="email" type="email" class="mt-1 block w-full text-sm" placeholder="provider@gmail.com" required />
     </div>
 
     <div>
       <x-input-label for="update-address" :value="__('Address')" />
-      <x-text-input id="update-address" name="address" type="text" class="mt-1 block w-full text-sm" placeholder="Street A, District B, City C" />
+      <x-text-input id="update-address" name="address" type="text" class="mt-1 block w-full text-sm" placeholder="Street A, District B, City C" required />
     </div>
   </x-admin.update-modal>
 
