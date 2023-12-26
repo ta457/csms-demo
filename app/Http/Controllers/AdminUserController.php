@@ -29,7 +29,8 @@ class AdminUserController extends Controller
         }
 
         if(request('search')) {
-            $users->where('name', 'like', '%' . request('search') . '%');
+            $users->where('name', 'like', '%' . request('search') . '%')
+                ->orWhere('email', 'like', '%' . request('search') . '%');
         }
 
         if(request('filter_role')) {
@@ -82,8 +83,13 @@ class AdminUserController extends Controller
         ]);
 
         $attributes['role'] = $attributes['role'] * 1;
-        $user->update($attributes);
-        return redirect("/admin/users")->with('success', 'Your changes have been saved');
+
+        if (!(User::where('username', $attributes['username'])->get()->count() > 0)) {
+            $user->update($attributes);
+            return redirect('/admin/users')->with('success', 'Your changes have been saved');
+        } else {
+            return redirect('/admin/users')->with('failed', 'Username or Email is already existed');
+        }
     }
 
     public function destroy(User $user)

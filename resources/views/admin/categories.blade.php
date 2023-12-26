@@ -19,7 +19,7 @@
   <div class="py-12 sm:px-6 lg:px-8">
     
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
-      <x-admin.table-header action="/admin/categories">
+      <x-admin.table-header action="/admin/categories" search="Search by Name/description">
       </x-admin.table-header>
 
       <x-admin.table-body

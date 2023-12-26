@@ -29,7 +29,8 @@ class AdminCategoryController extends Controller
         }
 
         if(request('search')) {
-            $categories->where('name', 'like', '%' . request('search') . '%');
+            $categories->where('name', 'like', '%' . request('search') . '%')
+                ->orWhere('description', 'like', '%' . request('search') . '%');;
         }
 
         return $this->index($categories);

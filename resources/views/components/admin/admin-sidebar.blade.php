@@ -22,4 +22,12 @@
     label="Products">
     <x-icon.product-icon :active="$isProductPage" />
   </x-sidebar-item>
+
+  @php $isProviderPage = Str::contains(request()->route()->uri, '/providers') @endphp
+  <x-sidebar-item 
+    :active="$isProviderPage"
+    href="/admin/providers"
+    label="Providers">
+    <x-icon.provider-icon :active="$isProviderPage" />
+  </x-sidebar-item>
 </x-sidebar>

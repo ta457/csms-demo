@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'price', 'category_id'];
+    protected $fillable = ['name','description','price','quantity','category_id', 'provider_id'];
 
     protected $dateFormat = 'Y-m-d H:i:s';
 
@@ -18,9 +18,19 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class);
+    }
+
     public function getCategoryNameAttribute()
     {
         return $this->category->name;
+    }
+
+    public function getProviderNameAttribute()
+    {
+        return $this->provider->name;
     }
 
     public function images()

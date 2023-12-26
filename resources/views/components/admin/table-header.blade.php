@@ -47,7 +47,7 @@
           <div class="w-full">
             <input type="text" id="search" name="search"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block md:w-40 lg:w-56 p-2 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="Search by name/title/description" value="{{ request('search') }}">
+              placeholder="{{ $search }}" value="{{ request('search') }}">
           </div>
           <button type="submit"
             class="relative flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">

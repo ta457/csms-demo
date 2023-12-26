@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminProviderController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -122,6 +123,36 @@ Route::middleware('admin')->group(function () {
     Route::patch(
         '/admin/products/{product}',
         [AdminProductController::class, 'update']
+    );
+
+    // provider CRUD routes =========================================================
+    Route::get(
+        '/admin/providers',
+        [AdminProviderController::class, 'index']
+    );
+    Route::post(
+        '/admin/providers/filter',
+        [AdminProviderController::class, 'filter']
+    );
+    Route::post(
+        '/admin/providers',
+        [AdminProviderController::class, 'store']
+    );
+    Route::delete(
+        '/admin/providers/{provider}',
+        [AdminProviderController::class, 'destroy']
+    );
+    Route::post(
+        '/admin/providers/destroy-all',
+        [AdminProviderController::class, 'destroyAll']
+    );
+    Route::get(
+        '/admin/providers/{provider}',
+        [AdminProviderController::class, 'edit']
+    );
+    Route::patch(
+        '/admin/providers/{provider}',
+        [AdminProviderController::class, 'update']
     );
 });
 

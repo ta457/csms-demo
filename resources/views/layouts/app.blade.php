@@ -102,6 +102,18 @@
         document.getElementById('update-description').value = categoryData.description;
     }
 
+    function updateProviderModal(url, providerData) {
+        let form = document.getElementById('update-form');
+        form.action = url;
+        document.getElementById('update-created').value = providerData.created_at;
+        document.getElementById('update-updated').value = providerData.updated_at;
+        document.getElementById('update-name').value = providerData.name;
+        document.getElementById('update-description').value = providerData.description;
+        document.getElementById('update-phone').value = providerData.phone;
+        document.getElementById('update-email').value = providerData.email;
+        document.getElementById('update-address').value = providerData.address;
+    }
+
     function updateProductModal(url, productData) {
         let form = document.getElementById('update-form');
         form.action = url;
@@ -111,12 +123,21 @@
         document.getElementById('update-name').value = productData.name;
         document.getElementById('update-description').value = productData.description;
         document.getElementById('update-price').value = productData.price;
+        document.getElementById('update-quantity').value = productData.quantity;
         let categorySelect = document.getElementById('update-category');
         for (let i = 0; i < categorySelect.options.length; i++) {
             if (categorySelect.options[i].value == productData.category_id) {
                 categorySelect.options[i].selected = true;
             } else {
                 categorySelect.options[i].selected = false;
+            }
+        }
+        let providerSelect = document.getElementById('update-provider');
+        for (let i = 0; i < providerSelect.options.length; i++) {
+            if (providerSelect.options[i].value == productData.provider_id) {
+                providerSelect.options[i].selected = true;
+            } else {
+                providerSelect.options[i].selected = false;
             }
         }
 
@@ -190,6 +211,9 @@
             }
             if(key === 'product') {
                 updateProductModal(url, data);
+            }
+            if(key === 'provider') {
+                updateProviderModal(url, data);
             }
         })
         .catch(function (error) {

@@ -1,6 +1,7 @@
 @props([
 'products' => $props['products'],
-'categories' => $props['categories']
+'categories' => $props['categories'],
+'providers' => $props['providers']
 ])
 
 <x-app-layout>
@@ -20,7 +21,7 @@
   <div class="py-12 sm:px-6 lg:px-8">
     
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
-      <x-admin.table-header action="/admin/products">
+      <x-admin.table-header action="/admin/products" search="Search by Name/description">
         <select name="filter_category"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full px-2 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
           <option @if (request('filter_category') == 0) @selected(true) @endif  value="0">All</option>
@@ -35,7 +36,7 @@
 
       <x-admin.table-body
         action='/admin/products/destroy-all' 
-        :heads="['ID','Name','Description','Price','Category']">
+        :heads="['ID','Name','Description','Price','Category','Quantity']">
 
         @foreach ($products as $product)
           <tr class="border-b dark:border-gray-700">
@@ -57,6 +58,9 @@
             </td>
             <td class="px-4 py-3">
               {{ $product->category_name }}
+            </td>
+            <td class="px-4 py-3">
+              {{ $product->quantity }}
             </td>
             <x-admin.table-dropdown 
               action='/admin/products' :id="$product->id" 
@@ -89,6 +93,11 @@
     </div>
 
     <div>
+      <x-input-label for="quantity" :value="__('Quantity')" />
+      <x-text-input onkeypress="return isNumberKey(event)" id="quantity" name="quantity" type="text" class="mt-1 block w-full text-sm" placeholder="1000" required />
+    </div>
+
+    <div>
       <x-input-label for="category" :value="__('Category')" />
       <select id="category" name="category_id"
         class="mt-1 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-500 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -96,6 +105,19 @@
           <option class="text-gray-900 dark:text-white" 
             value="{{ $category->id }}">
             {{ $category->name }}
+          </option>
+        @endforeach
+      </select>
+    </div>
+
+    <div>
+      <x-input-label for="provider" :value="__('Provider')" />
+      <select id="provider" name="provider_id"
+        class="mt-1 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-500 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        @foreach ($providers as $provider)
+          <option class="text-gray-900 dark:text-white" 
+            value="{{ $provider->id }}">
+            {{ $provider->name }}
           </option>
         @endforeach
       </select>
@@ -138,6 +160,11 @@
     </div>
 
     <div>
+      <x-input-label for="update-quantity" :value="__('Quantity')" />
+      <x-text-input onkeypress="return isNumberKey(event)" id="update-quantity" name="quantity" type="text" class="mt-1 block w-full text-sm" placeholder="100000" required />
+    </div>
+
+    <div>
       <x-input-label for="update-category" :value="__('Category')" />
       <select id="update-category" name="category_id"
         class="mt-1 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-500 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -145,6 +172,19 @@
           <option class="text-gray-900 dark:text-white" 
             value="{{ $category->id }}">
             {{ $category->name }}
+          </option>
+        @endforeach
+      </select>
+    </div>
+
+    <div>
+      <x-input-label for="update-provider" :value="__('Provider')" />
+      <select id="update-provider" name="provider_id"
+        class="mt-1 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-500 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        @foreach ($providers as $provider)
+          <option class="text-gray-900 dark:text-white" 
+            value="{{ $provider->id }}">
+            {{ $provider->name }}
           </option>
         @endforeach
       </select>
